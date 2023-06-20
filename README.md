@@ -64,3 +64,17 @@
     * Those commands exist because of race conditions. One example would be two separate servers running the same backend code doing a `GET`, increamenting the value and after that doing a `SET`. At some point those two servers would `GET` the same value and override each others increment operation. This is a typical race condition.
 
 * ![basic_commands](./images/basic_commands_26.png)
+
+## Section 4: Local Redis Setup
+
+* `Redis Stack` contains the core Redis database and some additional modules that extend the functionality of Redis.
+
+* If you do not already have HomeBrew installed, navigate to https://brew.sh/ and run the command at the top in your terminal to install HomeBrew
+
+* At your terminal, run `brew tap redis-stack/redis-stack`
+
+* At your terminal, run `brew install redis-stack`
+
+* To start Redis, run `redis-stack-server`
+
+* To connect to your local Redis server and execute commands, run `redis-cli`
