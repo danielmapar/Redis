@@ -78,3 +78,75 @@
 * To start Redis, run `redis-stack-server`
 
 * To connect to your local Redis server and execute commands, run `redis-cli`
+
+## Hashes in Redis
+
+* ![hash_table](./images/hash_table_1.png)
+
+* ![hash_table](./images/hash_table_2.png)
+
+* ![hash_table](./images/hash_table_3.png)
+
+* ![hash_table](./images/hash_table_4.png)
+
+* ![hash_table](./images/hash_table_5.png)
+
+* ![hash_table](./images/hash_table_6.png)
+
+* ![hash_table](./images/hash_table_7.png)
+
+* ![hash_table](./images/hash_table_8.png)
+
+* ![hash_table](./images/hash_table_9.png)
+
+* ![hash_table](./images/hash_table_10.png)
+    * If you try to increment a key that does not exist, it will create it automatically.
+
+* ![hash_table](./images/hash_table_11.png)
+
+* ![hash_table](./images/hash_table_12.png)
+
+## Section 8: Pipelining Commands
+
+* Redis Pipelining
+    * A Request/Response server can be implemented so that it is able to process new requests even if the client hasn't already read the old responses. This way it is possible to send multiple commands to the server without waiting for the replies at all, and finally read the replies in a single step.
+
+    * This is called pipelining, and is a technique widely in use for many decades. For instance many POP3 protocol implementations already support this feature, dramatically speeding up the process of downloading new emails from the server.
+
+## Section 9: Enforcing Uniqueness with Sets
+
+
+* ![set](./images/sets_1.png)
+
+* ![set](./images/sets_2.png)
+
+* ![set](./images/sets_3.png)
+
+* ![set](./images/sets_4.png)
+
+* ![set](./images/sets_5.png)
+
+* ![set](./images/sets_6.png)
+
+* ![set](./images/sets_7.png)
+
+* ![set](./images/sets_8.png)
+
+* ![set](./images/sets_9.png)
+    * The first `set` dictates the intersect result.
+
+* ![set](./images/sets_10.png)
+
+* ![set](./images/sets_11.png)
+
+* ![set](./images/sets_12.png)
+
+* ![set](./images/sets_13.png)
+
+* ![set](./images/sets_14.png)
+
+* ![set](./images/sets_15.png)
+
+* ![set](./images/sets_16.png)
+
+* ![set](./images/sets_17.png)
