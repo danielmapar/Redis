@@ -150,3 +150,92 @@
 * ![set](./images/sets_16.png)
 
 * ![set](./images/sets_17.png)
+
+## Section 11: Organizing Data with Sorted Sets
+
+* ![sorted_set](./images/sorted_set_1.png)
+
+* ![sorted_set](./images/sorted_set_2.png)
+
+* ![sorted_set](./images/sorted_set_3.png)
+
+* ![sorted_set](./images/sorted_set_4.png)
+
+* ![sorted_set](./images/sorted_set_5.png)
+
+* ![sorted_set](./images/sorted_set_6.png)
+
+* ![sorted_set](./images/sorted_set_7.png)
+
+* ![sorted_set](./images/sorted_set_8.png)
+
+* ![sorted_set](./images/sorted_set_9.png)
+
+* ![sorted_set](./images/sorted_set_10.png)
+
+* ![sorted_set](./images/sorted_set_11.png)
+
+* ![sorted_set](./images/sorted_set_12.png)
+
+* ![sorted_set](./images/sorted_set_13.png)
+
+* ![sorted_set](./images/sorted_set_14.png)
+
+* ![sorted_set](./images/sorted_set_15.png)
+
+* ![sorted_set](./images/sorted_set_16.png)
+
+* ![sorted_set](./images/sorted_set_17.png)
+
+* ![sorted_set](./images/sorted_set_18.png)
+
+* ![sorted_set](./images/sorted_set_19.png)
+
+* ![sorted_set](./images/sorted_set_20.png)
+
+* ![sorted_set](./images/sorted_set_21.png)
+    * `REV` reverts the sorted set from `ASC` to `DSC`.
+
+## Section 13: From Relational Data to Redis
+
+* ![sort](./images/sort_1.png)
+    * `SORT` is a great way to `JOIN` data. You can first get a set of `keys` from a `set` and the use that to search for other `keys`.
+        * e.g. `books:*->year`. The `*` is used to look for other keys.
+
+* ![sort](./images/sort_2.png)
+
+* ![sort](./images/sort_3.png)
+
+* ![sort](./images/sort_4.png)
+
+* ![sort](./images/sort_5.png)
+
+* ![sort](./images/sort_6.png)
+
+* ![sort](./images/sort_7.png)
+
+* ![sort](./images/sort_8.png)
+
+* ![sort](./images/sort_9.png)
+
+* ![sort](./images/sort_10.png)
+
+* ![sort](./images/sort_11.png)
+
+* ![sort](./images/sort_12.png)
+
+## Section 14: HyeperLogLog Structures
+
+* ![hyperloglog](./images/hyperloglog_1.png)
+
+* ![hyperloglog](./images/hyperloglog_2.png)
+
+* ![hyperloglog](./images/hyperloglog_3.png)
+
+* ![hyperloglog](./images/hyperloglog_4.png)
+
+* ![hyperloglog](./images/hyperloglog_5.png)
+
+* ![hyperloglog](./images/hyperloglog_6.png)
+
+* ![hyperloglog](./images/hyperloglog_7.png)
