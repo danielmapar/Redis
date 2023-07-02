@@ -239,3 +239,300 @@
 * ![hyperloglog](./images/hyperloglog_6.png)
 
 * ![hyperloglog](./images/hyperloglog_7.png)
+
+
+## Section 15: Storing Collections with Lists
+
+* ![list](./images/list_1.png)
+
+* ![list](./images/list_2.png)
+
+* ![list](./images/list_3.png)
+
+* ![list](./images/list_4.png)
+
+* ![list](./images/list_5.png)
+
+* ![list](./images/list_6.png)
+
+* ![list](./images/list_7.png)
+
+* ![list](./images/list_8.png)
+
+* ![list](./images/list_9.png)
+
+* ![list](./images/list_10.png)
+
+* ![list](./images/list_11.png)
+
+* ![list](./images/list_12.png)
+
+* ![list](./images/list_13.png)
+
+* ![list](./images/list_14.png)
+
+* ![list](./images/list_15.png)
+
+* ![list](./images/list_16.png)
+
+* ![list](./images/list_17.png)
+
+* ![list](./images/list_18.png)
+
+* ![list](./images/list_19.png)
+
+* ![list](./images/list_20.png)
+
+* ![list](./images/list_21.png)
+
+* ![list](./images/list_22.png)
+
+## Section 16: Transactions
+
+* ![concurrency](./images/concurrency_1.png)
+
+* ![concurrency](./images/concurrency_2.png)
+
+* ![concurrency](./images/concurrency_3.png)
+
+* ![concurrency](./images/concurrency_4.png)
+    * `MULTI` is used for a transaction containing many commands.
+
+* ![concurrency](./images/concurrency_5.png)
+    * As soon as `WATCH` is called on a `key`, it will watch for changes on that `key`. If any change happens, and we try to do a `MULTI` with a set of commands, as soon as we call `EXEC` the transaction will fail.
+    * All the commands in a transaction are serialized and executed sequentially. **A request sent by another client will never be served in the middle of the execution of a Redis Transaction.** This guarantees that the commands are executed as a single isolated operation.
+    * `WATCH` helps us to `GET` values and evalute if changes happened.
+
+* ![concurrency](./images/concurrency_6.png)
+
+## Section 17: Extending Redis with Scripting
+
+* ![lua](./images/lua_1.png)
+
+* ![lua](./images/lua_2.png)
+
+* ![lua](./images/lua_3.png)
+
+* ![lua](./images/lua_4.png)
+
+* ![lua](./images/lua_5.png)
+
+* ![lua](./images/lua_6.png)
+
+* ![lua](./images/lua_7.png)
+
+* ![lua](./images/lua_8.png)
+
+* ![lua](./images/lua_9.png)
+
+* ![lua](./images/lua_10.png)
+    * The advantage of Lua script is that we can execute custom redis operations on Redis not available in the redis commands arsenal & redis does not allow any operation until script is executed end to end.
+
+* ![lua](./images/lua_11.png)
+
+* ![lua](./images/lua_12.png)
+
+* ![lua](./images/lua_13.png)
+
+## Section 18: Understanding and Solving Concurrency Issues
+
+* ![concurrency_issue](./images/concurrency_issue_1.png)
+
+* ![concurrency_issue](./images/concurrency_issue_2.png)
+    * We could "RETRY" this operation many times to circumvent issues with `WATCH` failing on some transactions.
+
+* ![concurrency_issue](./images/concurrency_issue_3.png)
+    * In this example we spin 3 processes and we track how many transactions fail using `WATCH`. No retries in this case.
+
+* ![concurrency_issue](./images/concurrency_issue_4.png)
+
+* ![concurrency_issue](./images/concurrency_issue_5.png)
+
+* ![concurrency_issue](./images/concurrency_issue_6.png)
+
+* ![concurrency_issue](./images/concurrency_issue_7.png)
+
+* ![concurrency_issue](./images/concurrency_issue_8.png)
+
+* ![concurrency_issue](./images/concurrency_issue_9.png)
+
+* ![concurrency_issue](./images/concurrency_issue_10.png)
+
+* ![concurrency_issue](./images/concurrency_issue_11.png)
+
+* ![concurrency_issue](./images/concurrency_issue_12.png)
+
+* ![concurrency_issue](./images/concurrency_issue_13.png)
+
+* ```js
+    import { createClient, defineScript } from 'redis';
+    import { itemsKey, itemsByViewsKey, itemsViewsKey } from '$services/keys';
+
+    const client = createClient({
+        socket: {
+            host: process.env.REDIS_HOST,
+            port: parseInt(process.env.REDIS_PORT)
+        },
+        password: process.env.REDIS_PW,
+        scripts: {
+            // This is the script registered
+            unlock: defineScript({
+                NUMBER_OF_KEYS: 1,
+                transformArguments(key: string, token: string) {
+                    return [key, token];
+                },
+                transformReply(reply: any) {
+                    return reply;
+                },
+                SCRIPT: `
+                    if redis.call('GET', KEYS[1]) == ARGV[1] then
+                        return redis.call('DEL', KEYS[1])
+                    end
+                `
+            })
+        }
+    );
+
+    client.on('error', (err) => console.error(err));
+    client.connect();
+
+    export { client };
+    ```
+
+* ```js
+    import { client } from './client';
+    import { randomBytes } from 'crypto';
+
+    export const withLock = async (key: string, cb: (signal: any) => any) => {
+        // Initialize a few variables to control retry behavior
+        const retryDelayMs = 100;
+        let retries = 20;
+
+        // Generate a random value to store at the lock key
+        const token = randomBytes(6).toString('hex');
+        // Create the lock key
+        const lockKey = `lock:${key}`;
+
+        // Set up a while loop to implement the retry behavior
+        while (retries >= 0) {
+            retries--;
+            // Try to do a SET NX operation
+            const acquired = await client.set(lockKey, token, {
+                NX: true,
+                PX: 2000
+            });
+
+            if (!acquired) {
+                // ELSE brief pause (retryDelayMs) and then retry
+                await pause(retryDelayMs);
+                continue;
+            }
+
+            // IF the set is successful, then run the callback
+            try {
+                const signal = { expired: false };
+                setTimeout(() => {
+                    signal.expired = true;
+                }, timeoutMs);
+
+                const proxiedClient = buildClientProxy(timeoutMs);
+                const result = await cb(proxiedClient, signal);
+                return result;
+            } finally {
+                await client.unlock(lockKey, token);
+            }
+        }
+    };
+
+    type Client = typeof client;
+    const buildClientProxy = (timeoutMs: number) => {
+        const startTime = Date.now();
+
+        const handler = {
+            get(target: Client, prop: keyof Client) {
+                if (Date.now() >= startTime + timeoutMs) {
+                    throw new Error('Lock has expired.');
+                }
+
+                const value = target[prop];
+                return typeof value === 'function' ? value.bind(target) : value;
+            }
+        };
+        // The Proxy object enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object.
+	    return new Proxy(client, handler) as Client;
+    };
+
+    const pause = (duration: number) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, duration);
+        });
+    };
+    ```
+
+* ```js
+    import type { CreatSubAttrs, Bid } from '$services/types';
+    import { bidHistoryKey, itemsKey, itemsByPriceKey } from '$services/keys';
+    import { client, withLock } from '$services/redis';
+    import { DateTime } from 'luxon';
+    import { getItem } from './items';
+
+    const pause = (duration: number) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, duration);
+        });
+    };
+
+    // The following is the callback that is acting as client to make use of the acquired lock
+
+    export const createSubs = async (attrs: CreateSubsAttrs) => {
+        return withLock(attrs.itemId, async (lockedClient: typeof client, signal: any) => {
+            // 1) Fetching the item
+            // 2) Doing validation
+            // 3) Writing some data
+            const item = await getItem(attrs.itemId);
+
+            if (!item) {
+                throw new Error('Item does not exist');
+            }
+            if (item.price >= attrs.amount) {
+                throw new Error('Bid too low');
+            }
+            if (item.endingAt.diff(DateTime.now()).toMillis() < 0) {
+                throw new Error('Item closed to bidding');
+            }
+
+            const serialized = serializeHistory(attrs.amount, attrs.createdAt.toMillis());
+
+            if (signal.expired) {
+                throw new Error('Lock expired, cant write any more data');
+            }
+
+            return Promise.all([
+                lockedClient.rPush(bidHistoryKey(attrs.itemId), serialized),
+                lockedClient.hSet(itemsKey(item.id), {
+                    bids: item.bids + 1,
+                    price: attrs.amount,
+                    highestBidUserId: attrs.userId
+                }),
+                lockedClient.zAdd(itemsByPriceKey(), {
+                    value: item.id,
+                    score: attrs.amount
+                })
+            ]);
+	    });
+
+
+        const serializeHistory = (amount: number, createdAt: number) => {
+            return `${amount}:${createdAt}`;
+        };
+
+        const deserializeHistory = (stored: string) => {
+            const [amount, createdAt] = stored.split(':');
+
+            return {
+                amount: parseFloat(amount),
+                createdAt: DateTime.fromMillis(parseInt(createdAt))
+            };
+        };
+    };
+    ```
