@@ -536,3 +536,136 @@
         };
     };
     ```
+
+## Section 19: Querying Data with RediSearch
+
+* ![redisearch](./images/redisearch_1.png)
+
+* ![redisearch](./images/redisearch_2.png)
+
+* ![redisearch](./images/redisearch_3.png)
+    * Get raw source code of module, compile it, load the module using `MODULE LOAD` on Redis.
+
+* ![redisearch](./images/redisearch_4.png)
+    * An alternative copy of Redis containing additional modules.
+
+* ![redisearch](./images/redisearch_5.png)
+
+* ![redisearch](./images/redisearch_6.png)
+
+* ![redisearch](./images/redisearch_7.png)
+
+* ![redisearch](./images/redisearch_8.png)
+
+* ![redisearch](./images/redisearch_9.png)
+    * Instead using Redis Core and maintaining a sorted set and other structures to do search on a hash map item, we could use Redis Search and create an index to do such query.
+
+* ![redisearch](./images/redisearch_10.png)
+
+* ![redisearch](./images/redisearch_11.png)
+
+* ![redisearch](./images/redisearch_12.png)
+
+* ![redisearch](./images/redisearch_13.png)
+
+* ![redisearch](./images/redisearch_14.png)
+
+* ![redisearch](./images/redisearch_15.png)
+
+* ![redisearch](./images/redisearch_16.png)
+
+* ![redisearch](./images/redisearch_17.png)
+
+* ![redisearch](./images/redisearch_18.png)
+
+* ![redisearch](./images/redisearch_19.png)
+
+* ![redisearch](./images/redisearch_20.png)
+
+* ![redisearch](./images/redisearch_21.png)
+
+* ![redisearch](./images/redisearch_22.png)
+
+* ![redisearch](./images/redisearch_23.png)
+
+* ![redisearch](./images/redisearch_24.png)
+
+* ![redisearch](./images/redisearch_25.png)
+
+* ![redisearch](./images/redisearch_26.png)
+
+* ![redisearch](./images/redisearch_27.png)
+
+* ![redisearch](./images/redisearch_28.png)
+
+* ![redisearch](./images/redisearch_29.png)
+
+* ![redisearch](./images/redisearch_30.png)
+
+* ![redisearch](./images/redisearch_31.png)
+
+* ![redisearch](./images/redisearch_32.png)
+
+* ![redisearch](./images/redisearch_33.png)
+
+* ![redisearch](./images/redisearch_34.png)
+
+* ![redisearch](./images/redisearch_35.png)
+
+* ![redisearch](./images/redisearch_36.png)
+
+* ![redisearch](./images/redisearch_37.png)
+
+* ![redisearch](./images/redisearch_38.png)
+
+* ![redisearch](./images/redisearch_39.png)
+
+* ![redisearch](./images/redisearch_40.png)
+
+* ![redisearch](./images/redisearch_41.png)
+
+* ![redisearch](./images/redisearch_42.png)
+
+* ![redisearch](./images/redisearch_43.png)
+
+* ![redisearch](./images/redisearch_44.png)
+
+* ![redisearch](./images/redisearch_45.png)
+
+* ![redisearch](./images/redisearch_46.png)
+
+* ![redisearch](./images/redisearch_47.png)
+
+* ![redisearch](./images/redisearch_48.png)
+
+* ![redisearch](./images/redisearch_49.png)
+
+* ![redisearch](./images/redisearch_50.png)
+
+* ![redisearch](./images/redisearch_51.png)
+
+* ![redisearch](./images/redisearch_52.png)
+
+* ![redisearch](./images/redisearch_53.png)
+
+* ![redisearch](./images/redisearch_54.png)
+
+* ![redisearch](./images/redisearch_55.png)
+
+* ![redisearch](./images/redisearch_56.png)
+
+* ![redisearch](./images/redisearch_57.png)
+
+* ![redisearch](./images/redisearch_58.png)
+
+* ![redisearch](./images/redisearch_59.png)
+
+* ![redisearch](./images/redisearch_60.png)
+
+* ![redisearch](./images/redisearch_61.png)
+
+* ![redisearch](./images/redisearch_62.png)
+
+* ![redisearch](./images/redisearch_63.png)
+
+* ![redisearch](./images/redisearch_64.png)
