@@ -592,6 +592,8 @@
 
 * ![redisearch](./images/redisearch_25.png)
 
+## Section 20: Search In Action
+
 * ![redisearch](./images/redisearch_26.png)
 
 * ![redisearch](./images/redisearch_27.png)
@@ -669,3 +671,66 @@
 * ![redisearch](./images/redisearch_63.png)
 
 * ![redisearch](./images/redisearch_64.png)
+
+* ![redisearch](./images/redisearch_65.png)
+
+* ![redisearch](./images/redisearch_66.png)
+
+* ![redisearch](./images/redisearch_67.png)
+
+* ![redisearch](./images/redisearch_68.png)
+
+* ![redisearch](./images/redisearch_69.png)
+
+* ![redisearch](./images/redisearch_70.png)
+
+* ![redisearch](./images/redisearch_71.png)
+
+* ![redisearch](./images/redisearch_72.png)
+
+* ![redisearch](./images/redisearch_73.png)
+
+* ![redisearch](./images/redisearch_74.png)
+
+## Section 21: Service Communication with Streams
+
+* ![streams](./images/streams_1.png)
+
+* ![streams](./images/streams_2.png)
+
+* ![streams](./images/streams_3.png)
+
+* ![streams](./images/streams_4.png)
+
+* ![streams](./images/streams_5.png)
+
+* ![streams](./images/streams_6.png)
+
+* ![streams](./images/streams_7.png)
+
+* ![streams](./images/streams_8.png)
+
+* ![streams](./images/streams_9.png)
+
+* ![streams](./images/streams_10.png)
+
+* ![streams](./images/streams_11.png)
+
+* ![streams](./images/streams_12.png)
+
+* ![streams](./images/streams_13.png)
+
+* ![streams](./images/streams_14.png)
+
+* ![streams](./images/streams_15.png)
+
+* ![streams](./images/streams_16.png)
+
+* ![streams](./images/streams_17.png)
+
+* ![streams](./images/streams_18.png)
+
+* ![streams](./images/streams_19.png)
+
+* ![streams](./images/streams_20.png)
+
